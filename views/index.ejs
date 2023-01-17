@@ -197,7 +197,7 @@
         /*Apply classes for slide in bar*/
         scrollpos = window.scrollY;
 
-        if (scrollpos > 10) {
+        if (scrollpos => 0) {
           header.classList.add("bg-white");
           navaction.classList.remove("bg-white");
           navaction.classList.add("gradient");
