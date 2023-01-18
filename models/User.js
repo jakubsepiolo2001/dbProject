@@ -5,7 +5,18 @@ const bcrypt = require("bcrypt");
 const User = new Schema(
     {
         username: { type: String, required: [true, 'username is required'], unique: true },
-        password: { type: String, required: [true, 'password is required'] }
+        password: { type: String, required: [true, 'password is required'] },
+        admin: {type: Boolean, default: false},
+        added_films: [{
+            film_id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "film",
+            },
+            date_added: String,
+            watched: Boolean,
+            rating: Number
+        }          
+        ],
     },
     { timestamps: true }
 );

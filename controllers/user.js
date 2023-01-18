@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 exports.create = async (req, res) => {
     
   try {
-    const user = new User({ username: req.body.username, password: req.body.password });
+    const user = new User({ username: req.body.username, password: req.body.password, added_films: {}});
     await user.save();
     res.redirect('/?message=user created')
   } catch (e) {
