@@ -3,10 +3,7 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
-const passport = require("passport");
 const bodyParser = require("body-parser");
-const LocalStrategy = require("passport-local").Strategy;
-const passportLocalMongoose = require("passport-local-mongoose");
 const expressSession = require("express-session");
 const User = require('./models/User');
 
@@ -22,6 +19,7 @@ const tastingController = require("./controllers/tasting");
 const homeController = require("./controllers/home");
 */
 const userController = require("./controllers/user");
+const filmController = require("./controllers/film");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -85,7 +83,9 @@ app.get("/login", function (req, res) {
   res.render("login");
   });
 
-  app.post('/login', userController.login);
+app.post('/login', userController.login);
+
+app.get("/films", filmController.list);
 
 app.listen(WEB_PORT, () => {
   console.log(
