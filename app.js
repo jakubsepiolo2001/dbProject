@@ -85,6 +85,12 @@ app.get("/login", function (req, res) {
 
 app.post('/login', userController.login);
 
+app.get("/logout", async (req, res) => {
+  req.session.destroy();
+  global.user = false;
+  res.redirect('/');
+})
+
 app.get("/films", filmController.list);
 
 app.listen(WEB_PORT, () => {
