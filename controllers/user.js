@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 exports.create = async (req, res) => {
     
@@ -51,7 +52,7 @@ exports.addFilm = async (req, res) => {
     
   try {
     const user_id = global.user._id;
-    const film_id = req.body.id;
+    const film_id = mongoose.Types.ObjectId(req.body.id);
     console.log("user id");
     console.log(user_id);
     console.log("film id");
