@@ -93,6 +93,12 @@ app.get("/logout", async (req, res) => {
 
 app.get("/films", filmController.list);
 
+app.get("/add-film", function (req, res) {
+  res.render("add-film");
+});
+
+app.post("/add-film", filmController.add);
+
 app.listen(WEB_PORT, () => {
   console.log(
     `Example app listening at http://localhost:${WEB_PORT}`,
