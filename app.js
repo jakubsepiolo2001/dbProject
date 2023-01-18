@@ -91,6 +91,8 @@ app.get("/logout", async (req, res) => {
   res.redirect('/');
 })
 
+app.post("/added-film-user", userController.addFilm);
+
 app.get("/films", filmController.list);
 
 app.get("/add-film", function (req, res) {

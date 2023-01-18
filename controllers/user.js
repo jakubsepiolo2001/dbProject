@@ -47,4 +47,29 @@ exports.login = async (req, res) => {
     }
 }
 
-  
+exports.addFilm = async (req, res) => {
+    
+  try {
+    const user_id = global.user._id;
+    const film_id = req.body.id;
+    console.log("user id");
+    console.log(user_id);
+    console.log("film id");
+    console.log(film_id);
+    const user = await User.updateOne({_id: user_id}, {
+      $push: {
+        added_films: film_id
+      }
+    });
+    res.redirect("/?message=added_film_to_user");
+  } catch (e) {
+    if (e.errors) {
+      console.log(e.errors);
+      res.render('/?message=failed_adding_film_to_user', { errors: e.errors })
+      return;
+    }
+    return res.status(400).send({
+      message: JSON.parse(e),
+    });
+  }
+}

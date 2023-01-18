@@ -149,7 +149,10 @@
                                 if(global.user){ 
                                 %>
                                 <td class="px-6 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add</a>
+                                    <form method="POST" action="/added-film-user">
+                                    <button type ="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add</button>
+                                    <input value="<%= film._id %>" type="hidden"  id="id" name="id" placeholder="Enter Title"/>
+                                    </form>
                                 </td>
                                 <%if(global.user.admin){%>
                                 <td class="px-6 py-4 text-right">
