@@ -113,6 +113,12 @@
                                 <th scope="col" class="px-6 py-3">
                                     
                                 </th>
+                                <%if(global.user.admin){%>
+                                    <th scope="col" class="px-6 py-3">
+                                    
+                                    </th>
+                                <%}
+                                %>
                             <%}%>
                             </tr>
                         </thead>
@@ -145,6 +151,12 @@
                                 <td class="px-6 py-4 text-right">
                                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add</a>
                                 </td>
+                                <%if(global.user.admin){%>
+                                <td class="px-6 py-4 text-right">
+                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
+                                </td>
+                                <%}
+                                %>
                                 <%}%>
                             </tr>
                             <%
