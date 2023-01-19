@@ -64,7 +64,13 @@
                               <button type="submit">Remove</button>
                               <input type="hidden" name="id" value="<%=film.film_id%>">
                             </form>
-                        </td>               
+                        </td>
+                        <td class="px-6 py-4">
+                          <form action="/user/edit-film" method="POST">
+                            <button type="submit">Edit</button>
+                            <input type="hidden" name="id" value="<%=film.film_id%>">
+                          </form>
+                      </td>                 
                       </tr>
                       <%
                   });
