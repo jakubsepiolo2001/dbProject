@@ -34,3 +34,13 @@ exports.add = async (req, res) => {
       }
   };
   
+  exports.remove = async (req, res) => {
+    try {
+      console.log(req.query)
+      const film_id = req.body.id;
+      const films = await Film.deleteOne({_id: req.body.id});
+      res.redirect("/films?message=film has been removed");
+    } catch (e) {
+      res.status(404).send({ message: "could not list films" });
+    }
+  };

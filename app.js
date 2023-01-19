@@ -45,6 +45,14 @@ const authMiddleware = async (req, res, next) => {
   next()
 }
 
+const authMiddlewareAdmin = async (req, res, next) => {
+  const user = await User.findById(req.session.userID);
+  if (!user.admin) {
+    return res.redirect('/');
+  }
+  next()
+}
+
 /**
  * notice above we are using dotenv. We can now pull the values from our environment
  */
@@ -107,6 +115,8 @@ app.get("/add-film", function (req, res) {
 });
 
 app.post("/add-film", filmController.add);
+
+app.post("/remove-film", authMiddlewareAdmin, filmController.remove);
 
 app.get("/user", authMiddleware, userController.showProfile);
 app.post("/user", authMiddleware, userController.removeFilm);
