@@ -57,7 +57,13 @@
                               <%=film.Title%>
                           </th>
                           <td class="px-6 py-4">
-                              <%=film.Watched%>
+                              <%if(film.Watched){
+                                %>
+                              Yes
+                              <%}
+                              else{%>
+                                No
+                              <%}%>
                           </td>
                           <td class="px-6 py-4">
                               <%=film.User_rating%>

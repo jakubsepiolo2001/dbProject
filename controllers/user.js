@@ -5,9 +5,11 @@ const mongoose = require('mongoose');
 exports.create = async (req, res) => {
     
   try {
+    const user_exists = await User.findOne({ username: req.body.username });
+    if(user_exists){res.redirect('/register?message=Username already taken')};
     const user = new User({ username: req.body.username, password: req.body.password});
     await user.save();
-    res.redirect('/?message=user created')
+    res.redirect('/?message=User successfully created')
   } catch (e) {
     if (e.errors) {
       console.log(e.errors);
@@ -24,7 +26,7 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username });
         if (!user) {
-            res.render('login', { errors: { username: { message: 'username not found' } } })
+            res.render('login', { errors: { username: { message: 'Invalid Credentials' } } })
             return;
         }
 
@@ -38,7 +40,7 @@ exports.login = async (req, res) => {
             return
         }
 
-        res.render('login', { errors: { password: { message: 'password does not match' } } })
+        res.render('login', { errors: { password: { message: 'Invalid Credentials' } } })
 
 
     } catch (e) {
