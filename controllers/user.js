@@ -54,10 +54,7 @@ exports.addFilm = async (req, res) => {
     const user_id = global.user._id;
     const film_id = mongoose.Types.ObjectId(req.body.id);
     const film_title = req.body.title;
-    console.log("user id");
-    console.log(user_id);
-    console.log("film id");
-    console.log(film_id);
+    console.log("adding film");
     const user = await User.updateOne({_id: user_id}, {
       $push: {
         added_films: {film_id: film_id, Title: film_title, Watched: false, User_rating: "N/A"}
@@ -95,10 +92,7 @@ exports.removeFilm = async (req, res) => {
   try{
     const user_id = global.user.id;
     const film_id = mongoose.Types.ObjectId(req.body.id);
-    console.log("user id");
-    console.log(user_id);
-    console.log("film id");
-    console.log(film_id);
+    console.log("removing single film");
     const user = await User.updateOne({_id: user_id},
       {"$pull": {
         added_films : {
@@ -107,6 +101,24 @@ exports.removeFilm = async (req, res) => {
       }
       });
     res.redirect("/user");
+  } catch (e){
+    console.log(e)
+    res.status(404).send({ message: "could not remove film" });
+  }
+};
+
+exports.removeFilmAll = async (req, res, next) => {
+  try{
+    const film_id = mongoose.Types.ObjectId(req.body.id);
+    console.log("removefilmall");
+    const user = await User.updateMany({},
+      {"$pull": {
+        added_films : {
+          film_id: film_id
+        }
+      }
+      });
+    next();
   } catch (e){
     console.log(e)
     res.status(404).send({ message: "could not remove film" });

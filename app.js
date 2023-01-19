@@ -116,7 +116,7 @@ app.get("/add-film", function (req, res) {
 
 app.post("/add-film", filmController.add);
 
-app.post("/remove-film", authMiddlewareAdmin, filmController.remove);
+app.post("/remove-film", authMiddlewareAdmin, userController.removeFilmAll, filmController.remove);
 
 app.get("/user", authMiddleware, userController.showProfile);
 app.post("/user", authMiddleware, userController.removeFilm);
