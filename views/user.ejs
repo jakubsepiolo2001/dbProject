@@ -24,8 +24,8 @@
     <%- include('common/header'); -%>
     <!--Hero-->
     <div class="pt-24">
-     <p>User: <%=global.user.username%></p>
      <div class="max-w-fit mx-auto">
+      <p class="text-g mb-0 mr-4 h-8 text-2xl text-zinc-50"><%=global.user.username%>'s film list</p>
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
               </div>
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="filmTable">
@@ -41,8 +41,11 @@
                               Rating
                           </th>
                           <th scope="col" class="px-6 py-3">
-                              X
+
                           </th>
+                          <th scope="col" class="px-6 py-3">
+
+                        </th>
                       </tr>
                   </thead>
                   <tbody>
