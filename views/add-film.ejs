@@ -1,23 +1,106 @@
-<h1> Add new film </h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      FilmSave
+    </title>
+    <meta name="description" content="Simple landind page" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" href="./styles/styles.css"/>
+    <!--Replace with your tailwind.css once created-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
+    <!-- Define your gradient here - use online tools to find a gradient matching your branding-->
+    <style>
+      .gradient {
+        background: linear-gradient(90deg, #ff2323 0%, #131313 100%);
+      }
+    </style>
+  </head>
+  <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
+    <%- include('common/header'); -%>
+    <!--Hero-->
+    <div class="pt-24">
+        <section>
+            <div class="px-6 h-full text-gray-800">
+              <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
+                <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
+                <p class="text-g mb-0 mr-4 h-8 text-2xl text-zinc-50">Add a new film</p>
+                  <form method="POST" action="/add-film">          
+                    <div class="mb-6">
+                      <input
+                        type="text"
+                        class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        name="Title"
+                        placeholder="Title"
+                      />
+                    </div>
+          
+                    <!-- Password input -->
+                    <div class="mb-6">
+                      <input
+                        type="text"
+                        class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        name="Genre"
+                        placeholder="Genre"
+                      />
+                    </div>
 
-<form action="/add-film" method="POST">
-    <input type="text" name="Title"
-    placeholder="Title">
-    <input type="text" name="Genre"
-    placeholder="Genre">
-    <input type="text" name="Premiere"
-    placeholder="Premiere">
-    <input type="text" name="Runtime"
-    placeholder="Runtime">
-    <input type="text" name="IMDBScore"
-    placeholder="IMDB Score">
-    <input type="text" name="Language"
-    placeholder="Language">
-    <button>Submit</button>
-</form>
+                    <div class="mb-6">
+                        <input
+                          type="text"
+                          class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          name="Premiere"
+                          placeholder="Premiere"
+                        />
+                      </div>
 
-<h1>This is home page</h1>
+                      <div class="mb-6">
+                        <input
+                          type="number"
+                          class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          name="Runtime"
+                          placeholder="Runtime"
+                          min="0"
+                          max="99999"
+                          step="1"
+                        />
+                      </div>
 
-<li><a href="/register">Sign up!!</a></li>
-<li><a href="/login">Login</a></li>
-<li><a href="/logout">Logout</a></li>
+                      <div class="mb-6">
+                        <input
+                          type="number"
+                          class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          name="IMDBScore"
+                          placeholder="IMDBScore"
+                          min="0"
+                          max="10"
+                          step="0.1"
+                        />
+                      </div>
+
+                      <div class="mb-6">
+                        <input
+                          type="text"
+                          class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          name="Language"
+                          placeholder="Language"
+                        />
+                      </div>
+                    
+                    <div class="text-center lg:text-left">
+                      <button type="submit" class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                        Add film
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+    </div>
+  </body>
+</html>

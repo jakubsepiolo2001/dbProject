@@ -56,7 +56,6 @@ exports.addFilm = async (req, res) => {
     const user_id = global.user._id;
     const film_id = mongoose.Types.ObjectId(req.body.id);
     const film_title = req.body.title;
-    console.log("adding film");
     const user = await User.updateOne({_id: user_id}, {
       $push: {
         added_films: {film_id: film_id, Title: film_title, Watched: false, User_rating: "N/A"}
@@ -78,7 +77,6 @@ exports.addFilm = async (req, res) => {
 exports.showProfile = async (req, res) => {
 
     try {
-      console.log(req.query)
       const user_id = global.user.id;
       const films = await User.findById(user_id, {added_films: 1, _id: 0});
       res.render("user", { films: films.added_films});
@@ -92,7 +90,6 @@ exports.removeFilm = async (req, res) => {
   try{
     const user_id = global.user.id;
     const film_id = mongoose.Types.ObjectId(req.body.id);
-    console.log("removing single film");
     const user = await User.updateOne({_id: user_id},
       {"$pull": {
         added_films : {
@@ -110,7 +107,6 @@ exports.removeFilm = async (req, res) => {
 exports.removeFilmAll = async (req, res, next) => {
   try{
     const film_id = mongoose.Types.ObjectId(req.body.id);
-    console.log("removefilmall");
     const user = await User.updateMany({},
       {"$pull": {
         added_films : {
@@ -127,12 +123,10 @@ exports.removeFilmAll = async (req, res, next) => {
 
 exports.editFilm = async (req, res, next) => {
   try{
-    console.log(req.query)
     const user_id = global.user.id;
     const film_id = mongoose.Types.ObjectId(req.body.id);
     const film = await User.find({_id: user_id, "added_films.film_id": film_id}, {_id: 0, admin: 0, added_films: {$elemMatch: {film_id: film_id}}});
     const edit_film = film[0].added_films;
-    console.log(edit_film);
     res.render("update-user-film", { film: edit_film});
   } catch (e){
     console.log(e)
@@ -142,13 +136,11 @@ exports.editFilm = async (req, res, next) => {
 
 exports.updateFilm = async (req, res, next) => {
   try{
-    console.log(req.query)
     const user_id = global.user.id;
     const film_id = mongoose.Types.ObjectId(req.body.id);
     const watched = (req.body.watched == "Yes");
     const user_rating = Number(req.body.user_rating);
     const film = await User.updateOne({_id : user_id, "added_films.film_id": film_id} , {$set: {"added_films.$.Watched": watched, "added_films.$.User_rating": user_rating}})
-    console.log(film);
     res.redirect("/user");
   } catch (e){
     console.log(e)

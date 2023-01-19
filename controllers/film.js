@@ -2,7 +2,6 @@ const Film = require("../models/Film");
 
 exports.list = async (req, res) => {
   try {
-    console.log(req.query)
     const message = req.query.message;
     const films = await Film.find({});
     res.render("films", { films: films, message: message });
@@ -18,13 +17,14 @@ exports.add = async (req, res) => {
           Genre: req.body.Genre,
           Premiere: req.body.Premiere,
           Runtime: parseInt(req.body.Runtime),
-          "IMDB Score": parseInt(req.body.IMDBScore),
+          "IMDB Score": Number(req.body.IMDBScore),
           Language: req.body.Language
         })
     
         res.redirect('/films?message=film has been added')
       } catch (e) {
         if (e.errors) {
+          console.log(e);
           res.render('add-film', { errors: e.errors })
           return;
         }
@@ -36,7 +36,6 @@ exports.add = async (req, res) => {
   
   exports.remove = async (req, res) => {
     try {
-      console.log("removing single film")
       const film_id = req.body.id;
       const films = await Film.deleteOne({_id: film_id});
       res.redirect('films');
