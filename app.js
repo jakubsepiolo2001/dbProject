@@ -47,6 +47,9 @@ const authMiddleware = async (req, res, next) => {
 
 const authMiddlewareAdmin = async (req, res, next) => {
   const user = await User.findById(req.session.userID);
+  if (!user) {
+    return res.redirect('/');
+  }
   if (!user.admin) {
     return res.redirect('/');
   }
@@ -110,7 +113,7 @@ app.post("/added-film-user", userController.addFilm);
 
 app.get("/films", filmController.list);
 
-app.get("/add-film", function (req, res) {
+app.get("/add-film", authMiddlewareAdmin, function (req, res) {
   res.render("add-film");
 });
 
@@ -118,8 +121,8 @@ app.post("/add-film", filmController.add);
 
 app.post("/remove-film", authMiddlewareAdmin, userController.removeFilmAll, filmController.remove);
 
-app.post("/user/edit-film", userController.editFilm);
-app.post("/user/update-film", userController.updateFilm);
+app.post("/user/edit-film", authMiddleware, userController.editFilm);
+app.post("/user/update-film", authMiddleware, userController.updateFilm);
 
 app.get("/user", authMiddleware, userController.showProfile);
 app.post("/user", authMiddleware, userController.removeFilm);
