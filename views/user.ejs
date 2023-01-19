@@ -25,41 +25,55 @@
     <!--Hero-->
     <div class="pt-24">
      <p>User: <%=global.user.username%></p>
-     <table>
-        <tr>
-            <th>
-            Title    
-            </th>
-            <th>
-                Watched
-            </th>
-            <th>
-                Rating
-            </th>
-            <th>
-
-            </th>
-        </tr>
-        <%films.forEach(film =>{%>
-            <tr>
-                <td>
-                    <%=film.Title%>
-                </td>
-                <td>
-                    <%=film.Watched%>
-                </td>
-                <td>
-                    <%=film.User_rating%>
-                </td>
-                <td>
-                  <form action="/user" method="POST">
-                    <button type="submit">Remove</button>
-                    <input type="hidden" name="id" value="<%=film.film_id%>">
-                  </form>
-              </td>
-            </tr>
-        <%});%>
-     </table>
+     <div class="max-w-fit mx-auto">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+              </div>
+              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="filmTable">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                          <th scope="col" class="px-6 py-3">
+                              Title
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Watched
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Rating
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              X
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <%
+                      films.forEach(film => {
+                      %>
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                          <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                              <%=film.Title%>
+                          </th>
+                          <td class="px-6 py-4">
+                              <%=film.Watched%>
+                          </td>
+                          <td class="px-6 py-4">
+                              <%=film.User_rating%>
+                          </td>
+                          <td class="px-6 py-4">
+                            <form action="/user" method="POST">
+                              <button type="submit">Remove</button>
+                              <input type="hidden" name="id" value="<%=film.film_id%>">
+                            </form>
+                        </td>               
+                      </tr>
+                      <%
+                  });
+                  %>            
+                  </tbody>
+              </table>
+          </div>
+          <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+      </div>
     </div>
   </body>
 </html>
