@@ -60,13 +60,13 @@ const authMiddlewareAdmin = async (req, res, next) => {
  * notice above we are using dotenv. We can now pull the values from our environment
  */
 
-const { WEB_PORT, MONGODB_URI } = process.env;
+const { WEB_PORT, MONGODB_URI, MONGODB__PRODUCTION_URI } = process.env;
 
 /**
  * connect to database
  */
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.NODE_ENV === "production" ? MONGODB__PRODUCTION_URI : MONGODB_URI, { useNewUrlParser: true });
 mongoose.connection.on("error", (err) => {
   console.error(err);
   console.log(
