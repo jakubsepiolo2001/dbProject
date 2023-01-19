@@ -25,152 +25,83 @@
     <nav id="header" class="fixed w-full z-30 top-0 text-white">
       <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div class="pl-4 flex items-center">
-            <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
-                <!--Icon from: http://www.potlabicons.com/ -->
-                FilmSave
-              </a>
-            </div>
-            <div class="block lg:hidden pr-4">
-              <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <title>Menu</title>
-                  <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-                </svg>
-              </button>
-            </div>
-            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
-              <ul class="list-reset lg:flex justify-end flex-1 items-center">
+          <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
+            <!--Icon from: http://www.potlabicons.com/ -->
+            FilmSave
+          </a>
+        </div>
+        <div class="block lg:hidden pr-4">
+          <button id="nav-toggle" class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <title>Menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+          </button>
+        </div>
+        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
+          <ul class="list-reset lg:flex justify-end flex-1 items-center">
+            <li class="mr-3">
+              <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/login">Log in</a>
+            </li>
+            <li class="mr-3">
+              <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/films">Films</a>
+            </li>
+            <% if(global.user) {%>
                 <li class="mr-3">
-                  <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/login">Log in</a>
-                </li>
-                <li class="mr-3">
-                  <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/films">Films</a>
-                </li>
-                <% if(global.user) {%>
-                    <li class="mr-3">
-                        <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#"><%=global.user.username%></a>
-                      </li>
-                      <a href="/logout"><button
-                        id="navAction"
-                        class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                      >
-                        Log Out
-                      </button></a>
-                <%}
-                else{%>
-                  <a href="/register"><button
+                    <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#"><%=global.user.username%></a>
+                  </li>
+                  <a href="/logout"><button
                     id="navAction"
                     class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                   >
-                    Register
+                    Log Out
                   </button></a>
-                <%}%>
-              </ul>
+            <%}
+            else{%>
+              <a href="/register"><button
+                id="navAction"
+                class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+              >
+                Register
+              </button></a>
+            <%}%>
+          </ul>
         </div>
       </div>
       <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
     </nav>
     <!--Hero-->
     <div class="pt-24">
-        <div class="max-w-fit mx-auto">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <div class="p-4">
-                    <label for="table-search" class="sr-only">Search</label>
-                    <div class="relative mt-1">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                        <input type="text" id="table-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
-                </div>
-                    </div>
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400" id="filmTable">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Title
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Genre
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Premiere
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Runtime
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    IMDB Score
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Language
-                                </th>
-                                <%if(global.user){%>
-                                <th scope="col" class="px-6 py-3">
-                                    
-                                </th>
-                                <%if(global.user.admin){%>
-                                    <th scope="col" class="px-6 py-3">
-                                    
-                                    </th>
-                                <%}
-                                %>
-                            <%}%>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                            films.forEach(film => {
-                            %>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                    <%=film.Title%>
-                                </th>
-                                <td class="px-6 py-4">
-                                    <%=film.Genre%>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%=film.Premiere%>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%=film.Runtime%>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%=film["IMDB Score"]%>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <%=film.Language%>
-                                </td>
-                                <%
-                                if(global.user){ 
-                                %>
-                                <td class="px-6 py-4 text-right">
-                                    <form method="POST" action="/added-film-user">
-                                    <button type ="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add</button>
-                                    <input value="<%= film._id %>" type="hidden"  id="id" name="id" placeholder="Enter Title"/>
-                                    <input value="<%= film.Title %>" type="hidden"  id="title" name="title" placeholder="Enter Title"/>
-                                    </form>
-                                </td>
-                                <%if(global.user.admin){%>
-                                <td class="px-6 py-4 text-right">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</a>
-                                </td>
-                                <%}
-                                %>
-                                <%}%>
-                            </tr>
-                            <%
-                        });
-                        %>            
-                        </tbody>
-                    </table>
-                </div>
-                <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
-            </div>
+     <p>User: <%=global.user.username%></p>
+     <table>
+        <tr>
+            <th>
+            Title    
+            </th>
+            <th>
+                Watched
+            </th>
+            <th>
+                Rating
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        <%films.forEach(film =>{%>
+            <tr>
+                <td>
+                    <%=film.Title%>
+                </td>
+                <td>
+                    <%=film.Watched%>
+                </td>
+                <td>
+                    <%=film.User_rating%>
+                </td>
+            </tr>
+        <%});%>
+     </table>
     </div>
     <div class="relative -mt-12 lg:-mt-24">
       <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

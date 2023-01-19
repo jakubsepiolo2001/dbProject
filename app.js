@@ -37,6 +37,13 @@ app.use("*", async (req, res, next) => {
   next();
 })
 
+const authMiddleware = async (req, res, next) => {
+  const user = await User.findById(req.session.userID);
+  if (!user) {
+    return res.redirect('/');
+  }
+  next()
+}
 
 /**
  * notice above we are using dotenv. We can now pull the values from our environment
@@ -100,6 +107,8 @@ app.get("/add-film", function (req, res) {
 });
 
 app.post("/add-film", filmController.add);
+
+app.get("/user", authMiddleware, userController.showProfile);
 
 app.listen(WEB_PORT, () => {
   console.log(

@@ -53,13 +53,14 @@ exports.addFilm = async (req, res) => {
   try {
     const user_id = global.user._id;
     const film_id = mongoose.Types.ObjectId(req.body.id);
+    const film_title = req.body.title;
     console.log("user id");
     console.log(user_id);
     console.log("film id");
     console.log(film_id);
     const user = await User.updateOne({_id: user_id}, {
       $push: {
-        added_films: film_id
+        added_films: {film_id: film_id, Title: film_title, Watched: false, User_rating: "N/A"}
       }
     });
     res.redirect("/?message=added_film_to_user");
@@ -74,3 +75,18 @@ exports.addFilm = async (req, res) => {
     });
   }
 }
+
+exports.showProfile = async (req, res) => {
+
+    try {
+      console.log(req.query)
+      const user_id = global.user.id;
+      const films = await User.findById(user_id, {added_films: 1, _id: 0});
+      console.log(films.added_films);
+      console.log(films.added_films[0]);
+      res.render("user", { films: films.added_films});
+    } catch (e) {
+      console.log(e)
+      res.status(404).send({ message: "could not list user's films" });
+    }
+};
