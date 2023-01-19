@@ -90,3 +90,25 @@ exports.showProfile = async (req, res) => {
       res.status(404).send({ message: "could not list user's films" });
     }
 };
+
+exports.removeFilm = async (req, res) => {
+  try{
+    const user_id = global.user.id;
+    const film_id = mongoose.Types.ObjectId(req.body.id);
+    console.log("user id");
+    console.log(user_id);
+    console.log("film id");
+    console.log(film_id);
+    const user = await User.updateOne({_id: user_id},
+      {"$pull": {
+        added_films : {
+          film_id: film_id
+        }
+      }
+      });
+    res.redirect("/user");
+  } catch (e){
+    console.log(e)
+    res.status(404).send({ message: "could not remove film" });
+  }
+};

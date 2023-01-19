@@ -109,6 +109,7 @@ app.get("/add-film", function (req, res) {
 app.post("/add-film", filmController.add);
 
 app.get("/user", authMiddleware, userController.showProfile);
+app.post("/user", authMiddleware, userController.removeFilm);
 
 app.listen(WEB_PORT, () => {
   console.log(
