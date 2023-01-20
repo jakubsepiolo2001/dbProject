@@ -7,17 +7,6 @@ const bodyParser = require("body-parser");
 const expressSession = require("express-session");
 const User = require('./models/User');
 
-
-
-
-/**
- * Controllers (route handlers).
- 
-const tasterController = require("./controllers/taster");
-const userController = require("./controllers/user");
-const tastingController = require("./controllers/tasting");
-const homeController = require("./controllers/home");
-*/
 const userController = require("./controllers/user");
 const filmController = require("./controllers/film");
 
