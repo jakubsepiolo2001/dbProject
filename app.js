@@ -13,8 +13,22 @@ const filmController = require("./controllers/film");
 const app = express();
 app.set("view engine", "ejs");
 
-app.use(expressSession({ secret: 'foo barr', cookie: { expires: new Date(253402300000000) } }))
+app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressSession({ secret: 'topsecret', cookie: { expires: new Date(253402300000000) } }))
 
+const { WEB_PORT, MONGODB_URI, MONGODB__PRODUCTION_URI } = process.env;
+
+mongoose.connect(process.env.NODE_ENV === "production" ? MONGODB__PRODUCTION_URI : MONGODB_URI, { useNewUrlParser: true });
+mongoose.connection.on("error", (err) => {
+  console.error(err);
+  console.log(
+    "MongoDB connection error. Please make sure MongoDB is running.",
+    chalk.red("✗")
+  );
+  process.exit();
+});
 
 
 global.user = false;
@@ -45,51 +59,19 @@ const authMiddlewareAdmin = async (req, res, next) => {
   next()
 }
 
-/**
- * notice above we are using dotenv. We can now pull the values from our environment
- */
-
-const { WEB_PORT, MONGODB_URI, MONGODB__PRODUCTION_URI } = process.env;
-
-/**
- * connect to database
- */
-
-mongoose.connect(process.env.NODE_ENV === "production" ? MONGODB__PRODUCTION_URI : MONGODB_URI, { useNewUrlParser: true });
-mongoose.connection.on("error", (err) => {
-  console.error(err);
-  console.log(
-    "MongoDB connection error. Please make sure MongoDB is running.",
-    chalk.red("✗")
-  );
-  process.exit();
-});
-
-/***
- * We are applying our middlewear
- */
-app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
 
 app.get("/", (req, res) => {
   res.render("index", { errors: {}, user : req.user });
 });
 
-// Showing register form
 app.get("/register", function (req, res) {
   res.render("register");
   });
-
-// Handling user signup
 app.post('/register', userController.create);
 
 app.get("/login", function (req, res) {
   res.render("login");
   });
-
 app.post('/login', userController.login);
 
 app.get("/logout", async (req, res) => {
@@ -105,7 +87,6 @@ app.get("/films", filmController.list);
 app.get("/add-film", authMiddlewareAdmin, function (req, res) {
   res.render("add-film");
 });
-
 app.post("/add-film", filmController.add);
 
 app.post("/remove-film", authMiddlewareAdmin, userController.removeFilmAll, filmController.remove);

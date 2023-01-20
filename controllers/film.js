@@ -2,9 +2,8 @@ const Film = require("../models/Film");
 
 exports.list = async (req, res) => {
   try {
-    const message = req.query.message;
-    const films = await Film.find({});
-    res.render("films", { films: films, message: message });
+    const films = await Film.find({}).sort({"IMDB Score": -1});
+    res.render("films", {films: films});
   } catch (e) {
     res.status(404).send({ message: "could not list films" });
   }
