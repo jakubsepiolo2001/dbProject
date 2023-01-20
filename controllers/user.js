@@ -59,7 +59,7 @@ exports.addFilm = async (req, res) => {
         added_films: {film_id: film_id, Title: film_title, Watched: false, User_rating: "N/A"}
       }
     });
-    res.redirect("/?message=added_film_to_user");
+    res.redirect("/user?message=added_film_to_user");
   } catch (e) {
     if (e.errors) {
       console.log(e.errors);
@@ -128,7 +128,7 @@ exports.editFilm = async (req, res, next) => {
     res.render("update-user-film", { film: edit_film});
   } catch (e){
     console.log(e)
-    res.status(404).send({ message: "could not remove film" });
+    res.status(404).send({ message: "could not retrieve film" });
   }
 };
 
@@ -142,7 +142,7 @@ exports.updateFilm = async (req, res, next) => {
     res.redirect("/user");
   } catch (e){
     console.log(e)
-    res.status(404).send({ message: "could not remove film" });
+    res.status(404).send({ message: "could not update film" });
   }
 };
 
